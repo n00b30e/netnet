@@ -9,8 +9,9 @@ class IndexController extends Controller
 {
     // экшен для главной страницы
     public function index() {
-        dump(Article::all());
-        return view('index');
+        $articles = Article::orderByDesc('updated_at')->take(10)
+               ->get();
+        return view('index', compact('articles'));
     }
 
 }
